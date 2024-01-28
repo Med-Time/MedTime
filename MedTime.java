@@ -7,16 +7,16 @@ import java.util.*;
 // Parent class
 class Disease {
     private String name;
-    private int age;// not needed as we are not using it anywhere
+    private int age;
 
-    Disease(String name, int age) {
+    Disease(String name, int age) { 
         this.name = name;
         this.age = age;
     }
 
     public void getdetails() {
-        System.out.println("Hello! " + this.name + " you are " + this.age + " years old.\n"); // doesn't need to display
-                                                                                            // age
+        System.out.println("Hello! " + this.name + "," + this.age );
+        System.out.println();
     }
 }
 
@@ -27,17 +27,17 @@ class Fever extends Disease {
         super.getdetails();
     }
 
-    int dose = 6; // default dose
+    private int dose = 6; // default dose 
 
-    public void description() {
-        System.out.println(
+    public void description() { // a brief description about disease
+        System.out.println(   
                 "Fever is a high body temperature due to an infection, with symptoms like sweating, chills, headache, etc. Paracetamol and Dolopar are painkillers that also lower fever by blocking inflammation and reducing congestion. They should be taken as prescribed, not more than 3 days, and without alcohol or other paracetamol products. They can harm the liver and may not suit people with allergies or other conditions. Always consult a doctor before taking any medicine");
     }
 
-    List<String> medications = Arrays.asList("Paracetamol", "Dolopar", "Advil", "Motrin", "Antibiotics");
+    List<String> medications = Arrays.asList("Paracetamol", "Dolopar", "Advil", "Motrin", "Antibiotics"); // list of suggested medicines
 
-    public int getdose() {// doesn't need as we have already initialized dose and we can directly use it
-        return dose; // can be returned directly without creating a variable
+    public int getdose() {
+        return dose; 
     }
 }
 
@@ -47,7 +47,7 @@ class Cold extends Disease {
         super.getdetails();
     }
 
-    int dose = 6;
+    private int dose = 6;
 
     public int getdose() {
         return dose;
@@ -68,7 +68,7 @@ class Headache extends Disease {
         super.getdetails();
     }
 
-    int dose = 5;
+    private int dose = 5;
 
     public int getdose() {
         return dose;
@@ -88,7 +88,7 @@ class ThroatProblem extends Disease {
         super.getdetails();
     }
 
-    int dose = 6;
+    private int dose = 6;
 
     public int getdose() {
         return dose;
@@ -108,7 +108,7 @@ class Diabetes extends Disease {
         super.getdetails();
     }
 
-    int dose = 12;
+    private int dose = 12;
 
     public int getdose() {
         return dose;
@@ -128,7 +128,7 @@ class Asthma extends Disease {
         super.getdetails();
     }
 
-    int dose = 10;
+    private int dose = 10;
 
     public int getdose() {
         return dose;
@@ -148,7 +148,7 @@ class Hypertension extends Disease {
         super.getdetails();
     }
 
-    int dose = 8;
+    private int dose = 8;
 
     public int getdose() {
         return dose;
@@ -162,55 +162,46 @@ class Hypertension extends Disease {
     List<String> medications = Arrays.asList("Hydrochlorothiazide", "Spironolactone", "Enalapril", "Verapamil");
 }
 
-class AlarmClock {
+class AlarmClock {    
     private int reminder;
     private Timer timer;
     private TimerTask task;
-    private int dose;
+    private  int dose;
     int count = 1;
 
-    public AlarmClock(int reminder, int dose) {
+    public AlarmClock(int reminder,  int dose) { 
         this.reminder = reminder;
         this.dose = dose;
     }
 
     public void startAlarm() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         try (Scanner scanner = new Scanner(System.in)) {
-            File file = new File("sound.wav");
-            AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioStream);
-            clip.start();
-
-            // sound stop when enter is pressed
-            // System.out.println("Press enter to stop the alarm.");
-
-            // if (scanner.hasNextLine()) {
-            // scanner.nextLine(); // consume the next line of input
-            // clip.stop();
-            // clip.close();
-            // }
+            File file = new File("sound.wav");   //creates file object from "sound.wav" in the current working directory
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);  // obtains an AudioInputStream from the specified File object
+            Clip clip = AudioSystem.getClip();   //creates a new Clip object using AudioSystem.getClip() for playing back audio data
+            clip.open(audioStream);       // prepares clip to start playing audio
+            clip.start();              // starts audio for alarm
         } catch (Exception e) {
-            System.out.println("Error playing sound: " + e.getMessage());
+            System.out.println("Error playing sound: " + e.getMessage()); // print error message when unable to play audio
         }
     }
 
     public void startTimer() {
-        timer = new Timer();
-        task = new TimerTask() {
+        timer = new Timer();  //Timer class allows to schedule tasks to be executed at specified intervals
+        task = new TimerTask() {  // TimerTask overrides the run method, which contains the code that will be executed when the timer triggers
             @Override
             public void run() {
-                count += 1;
+                count += 1;  
                 System.out.println("Alarm ringing! Time to take medicine.");/// medication to medicine
                 try {
                     startAlarm();
                     Thread.sleep(3500); // Wait for 3.5 seconds for the alarm to finish playing
-                    if (count == dose) {
+                    if (count == dose) {  // remove the alarm when dose is completed
                         removeAlarm();
                     }
                 } catch (UnsupportedAudioFileException | IOException | LineUnavailableException
                         | InterruptedException e) {
-                    e.printStackTrace();
+                    e.printStackTrace();       // prints the stack trace to the console if an exception occurs
                 }
             }
         };
@@ -218,8 +209,9 @@ class AlarmClock {
     }
 
     public void removeAlarm() {
-        System.out.println("Dose completed! Thank you for using MedTime. Stay Healthy! :)");// changed the message
-        timer.cancel();
+        System.out.println();
+        System.out.println("Dose completed! Thank you for using MedTime. Stay Healthy! :)");
+        timer.cancel(); 
     }
 }
 
@@ -247,7 +239,7 @@ public class MedTime {
         System.out.println("7. Hypertension");
         int choice = sc.nextInt();
         sc.nextLine(); // Consume the newline character
-        int dose = 0;
+       int dose = 0;
         switch (choice) {
             case 1:
                 Fever fever = new Fever(name, age);
