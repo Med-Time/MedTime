@@ -155,12 +155,17 @@ class Hypertension extends Disease {
     }
 
     public void description() {
-        System.out.println(
-                "Hypertension, or high blood pressure, is a condition that occurs when the force of blood against the artery walls is too high. It can cause complications such as heart disease, stroke, and kidney damage. Hypertension often has no symptoms, but some people may experience headaches, nosebleeds, or shortness of breath. To prevent or lower hypertension, it is recommended to adopt healthy lifestyle habits, such as eating a balanced diet, reducing salt intake, exercising regularly, quitting smoking, managing stress, and limiting alcohol consumption. Some people may also need medications to control their blood pressure, such as diuretics, beta blockers, or ACE inhibitors. It is important to check your blood pressure regularly and consult your doctor for the best treatment plan.");
+            System.out.println("Hypertension, or high blood pressure, is a condition that occurs when the force of blood against" +
+                "the artery walls is too high. It can cause complications such as heart disease, stroke, and kidney damage. Hypertension" +
+                "often has no symptoms, but some people may experience headaches, nosebleeds, or shortness of breath. To prevent or lower" +
+                "hypertension, it is recommended to adopt healthy lifestyle habits, such as eating a balanced diet, reducing salt intake," +
+                "exercising regularly, quitting smoking, managing stress, and limiting alcohol consumption. Some people may also need" +
+                "medications to control their blood pressure, such as diuretics, beta blockers, or ACE inhibitors. It is important" +
+                "to check your blood pressure regularly and consult your doctor for the best treatment plan.");
+        }
+    
+        List<String> medications = Arrays.asList("Hydrochlorothiazide", "Spironolactone", "Enalapril", "Verapamil");
     }
-
-    List<String> medications = Arrays.asList("Hydrochlorothiazide", "Spironolactone", "Enalapril", "Verapamil");
-}
 
 class AlarmClock {    
     private int reminder;
